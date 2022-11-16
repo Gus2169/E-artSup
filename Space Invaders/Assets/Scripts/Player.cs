@@ -1,17 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float duration = 1f;
+    public bool start = false;
+    public AnimationCurve curve;
     public float speed = 5f;
     public Projectile laserPrefab;
     public System.Action killed;
     public bool laserActive { get; private set; }
 
+    [SerializeField] private AudioSource shoot;
+    [SerializeField] private AudioSource explosion;
     private void Update()
     {
         Vector3 position = transform.position;
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow)) {
             position.x -= speed * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
@@ -21,7 +28,7 @@ public class Player : MonoBehaviour
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
         Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
 
-        // Clamp the position of the character so they do not go out of bounds
+        
         position.x = Mathf.Clamp(position.x, leftEdge.x, rightEdge.x);
         transform.position = position;
 
@@ -30,10 +37,23 @@ public class Player : MonoBehaviour
         }
     }
 
+    IEnumerator Shaking() 
+    {
+        Vector3 startPosition = transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration) 
+        {
+            elapsedTime += Time.deltaTime;
+            float strength = curve.Evaluate(elapsedTime / duration);
+            transform.position = startPosition + Random.insideUnitSphere * strength;
+            yield return null;
+        }
+        transform.position = startPosition;
+    }
+
     private void Shoot()
     {
-        // Only one laser can be active at a given time so first check that
-        // there is not already an active laser
         if (!laserActive)
         {
             laserActive = true;
@@ -41,6 +61,7 @@ public class Player : MonoBehaviour
             Projectile laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             laser.destroyed += OnLaserDestroyed;
         }
+        shoot.Play();
     }
 
     private void OnLaserDestroyed(Projectile laser)
@@ -50,9 +71,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        explosion.Play();
         if (other.gameObject.layer == LayerMask.NameToLayer("Missile") ||
             other.gameObject.layer == LayerMask.NameToLayer("Invader"))
+            
         {
+
+            StartCoroutine(Shaking());
             if (killed != null) {
                 killed.Invoke();
             }

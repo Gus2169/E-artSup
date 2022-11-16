@@ -12,6 +12,8 @@ public class MysteryShip : MonoBehaviour
     public int direction { get; private set; } = -1;
     public bool spawned { get; private set; }
 
+    [SerializeField] private AudioSource ufo_lowpitch;
+
     private void Start()
     {
         // Transform the viewport to world coordinates so we can set the mystery
@@ -65,6 +67,7 @@ public class MysteryShip : MonoBehaviour
 
     private void Spawn()
     {
+        ufo_lowpitch.Play();
         direction *= -1;
 
         if (direction == 1) {
