@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float duration = 1f;
-    public bool start = false;
-    public AnimationCurve curve;
+    public CameraShake cameraShake;
     public float speed = 5f;
     public Projectile laserPrefab;
     public System.Action killed;
@@ -37,20 +35,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator Shaking() 
-    {
-        Vector3 startPosition = transform.position;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration) 
-        {
-            elapsedTime += Time.deltaTime;
-            float strength = curve.Evaluate(elapsedTime / duration);
-            transform.position = startPosition + Random.insideUnitSphere * strength;
-            yield return null;
-        }
-        transform.position = startPosition;
-    }
 
     private void Shoot()
     {
@@ -76,8 +60,7 @@ public class Player : MonoBehaviour
             other.gameObject.layer == LayerMask.NameToLayer("Invader"))
             
         {
-
-            StartCoroutine(Shaking());
+            StartCoroutine(cameraShake.Shake(.15f, .1f));
             if (killed != null) {
                 killed.Invoke();
             }
