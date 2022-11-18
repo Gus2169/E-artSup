@@ -16,6 +16,7 @@ public sealed class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
 
+
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -38,7 +39,6 @@ public sealed class GameManager : MonoBehaviour
         if (lives <= 0 && Input.GetKeyDown(KeyCode.Return)) {
             NewGame();
         }
-        
         
     }
 

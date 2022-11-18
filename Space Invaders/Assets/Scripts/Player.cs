@@ -9,9 +9,9 @@ public class Player : MonoBehaviour
     public Projectile laserPrefab;
     public System.Action killed;
     public bool laserActive { get; private set; }
+    
 
     [SerializeField] private AudioSource shoot;
-    [SerializeField] private AudioSource explosion;
     private void Update()
     {
         Vector3 position = transform.position;
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         transform.position = position;
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+            shoot.Play();
             Shoot();
         }
     }
@@ -45,7 +46,6 @@ public class Player : MonoBehaviour
             Projectile laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             laser.destroyed += OnLaserDestroyed;
         }
-        shoot.Play();
     }
 
     private void OnLaserDestroyed(Projectile laser)
@@ -55,13 +55,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //StartCoroutine(cameraShake.Shake(.15f, .1f));
-        explosion.Play();
         if (other.gameObject.layer == LayerMask.NameToLayer("Missile") ||
             other.gameObject.layer == LayerMask.NameToLayer("Invader"))
             
         {
-            
             if (killed != null) {
                 killed.Invoke();
             }
