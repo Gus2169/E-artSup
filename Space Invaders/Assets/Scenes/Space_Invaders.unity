@@ -388,6 +388,7 @@ MonoBehaviour:
   gameOverUI: {fileID: 797358150}
   scoreText: {fileID: 1984502043}
   livesText: {fileID: 188796889}
+  cameraShake: {fileID: 519420033}
 --- !u!1 &292519931
 GameObject:
   m_ObjectHideFlags: 0

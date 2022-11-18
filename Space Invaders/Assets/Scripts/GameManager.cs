@@ -11,6 +11,7 @@ public sealed class GameManager : MonoBehaviour
     public GameObject gameOverUI;
     public Text scoreText;
     public Text livesText;
+    public CameraShake cameraShake;
 
     public int score { get; private set; }
     public int lives { get; private set; }
@@ -37,6 +38,8 @@ public sealed class GameManager : MonoBehaviour
         if (lives <= 0 && Input.GetKeyDown(KeyCode.Return)) {
             NewGame();
         }
+        
+        
     }
 
     private void NewGame()
@@ -88,6 +91,8 @@ public sealed class GameManager : MonoBehaviour
 
     private void OnPlayerKilled()
     {
+        StartCoroutine(cameraShake.Shake(.15f, .1f));
+        
         SetLives(lives - 1);
 
         player.gameObject.SetActive(false);

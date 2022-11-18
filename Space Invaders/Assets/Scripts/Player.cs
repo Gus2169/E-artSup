@@ -55,12 +55,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //StartCoroutine(cameraShake.Shake(.15f, .1f));
         explosion.Play();
         if (other.gameObject.layer == LayerMask.NameToLayer("Missile") ||
             other.gameObject.layer == LayerMask.NameToLayer("Invader"))
             
         {
-            StartCoroutine(cameraShake.Shake(.15f, .1f));
+            
             if (killed != null) {
                 killed.Invoke();
             }
