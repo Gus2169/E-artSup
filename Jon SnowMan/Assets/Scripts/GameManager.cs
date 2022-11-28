@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour
     public Ghost[] ghosts;
     public Pacman pacman;
     public Transform pellets;
+    public int nbTotal = 240;
 
     public Text gameOverText;
+    public Text WinText;
     public Text scoreText;
     public Text livesText;
 
@@ -25,6 +27,10 @@ public class GameManager : MonoBehaviour
         if (lives <= 0 && Input.anyKeyDown) {
             NewGame();
         }
+        if (nbTotal == 0 ) 
+        {
+            Win();
+        } 
     }
 
     private void NewGame()
@@ -37,6 +43,7 @@ public class GameManager : MonoBehaviour
     private void NewRound()
     {
         gameOverText.enabled = false;
+        WinText.enabled = false;
 
         foreach (Transform pellet in pellets) {
             pellet.gameObject.SetActive(true);
@@ -63,6 +70,11 @@ public class GameManager : MonoBehaviour
         }
 
         pacman.gameObject.SetActive(false);
+    }
+
+        private void Win()
+    {
+        WinText.enabled = true;
     }
 
     private void SetLives(int lives)
@@ -108,6 +120,7 @@ public class GameManager : MonoBehaviour
         {
             pacman.gameObject.SetActive(false);
             Invoke(nameof(NewRound), 3f);
+            Win();
         }
     }
 
