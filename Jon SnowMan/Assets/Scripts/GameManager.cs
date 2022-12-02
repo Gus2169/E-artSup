@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
 
+    public GameObject AudioManager;
+    [SerializeField] private AudioSource JB_Hard;
+    [SerializeField] private AudioSource BGM;
+    
     private void Start()
     {
         NewGame();
@@ -123,9 +128,17 @@ public class GameManager : MonoBehaviour
             Win();
         }
     }
-
+    IEnumerator PowerMusic()
+    {   
+        BGM.Pause();
+        JB_Hard.Play();
+        yield return new WaitForSeconds(8f);
+        JB_Hard.Stop();
+        BGM.UnPause();
+    }
     public void PowerPelletEaten(PowerPellet pellet)
     {
+        StartCoroutine(PowerMusic());
         for (int i = 0; i < ghosts.Length; i++) {
             ghosts[i].frightened.Enable(pellet.duration);
         }
