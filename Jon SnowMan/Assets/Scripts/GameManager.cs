@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject AudioManager;
     [SerializeField] private AudioSource JB_Hard;
     [SerializeField] private AudioSource BGM;
-    
+
     private void Start()
     {
         NewGame();
@@ -40,13 +40,15 @@ public class GameManager : MonoBehaviour
 
     private void NewGame()
     {
+        BGM.Play();
         SetScore(0);
         SetLives(3);
         NewRound();
     }
 
     private void NewRound()
-    {
+    {   
+        BGM.Play();
         gameOverText.enabled = false;
         WinText.enabled = false;
 
@@ -80,6 +82,8 @@ public class GameManager : MonoBehaviour
         private void Win()
     {
         WinText.enabled = true;
+        BGM.Stop();
+        JB_Hard.Stop();
     }
 
     private void SetLives(int lives)
