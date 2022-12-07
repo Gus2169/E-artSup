@@ -8,6 +8,12 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameISPaused = false;
     public GameObject pauseMenuUI;
+    public CameraShake cameraShake;
+
+    public GameManager gameManager;
+    
+    [SerializeField] private AudioSource JB_Hard;
+    [SerializeField] private AudioSource BGM;
 
     void Update()
     {
@@ -24,6 +30,8 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume ()
     {
+        JB_Hard.UnPause();
+        BGM.UnPause();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameISPaused = false;
@@ -32,6 +40,9 @@ public class PauseMenu : MonoBehaviour
 
     void Pause ()
     {   
+        
+        JB_Hard.Pause();
+        BGM.Pause();
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameISPaused = true;

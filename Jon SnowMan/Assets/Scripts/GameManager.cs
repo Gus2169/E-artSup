@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Text WinText;
     public Text scoreText;
     public Text livesText;
+    public CameraShake cameraShake;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -36,6 +37,10 @@ public class GameManager : MonoBehaviour
         {
             Win();
         } 
+        if (PauseMenu.GameISPaused)
+        {
+            StopCoroutine(cameraShake.Shake(8f, .040f));
+        }
     }
 
     private void NewGame()
@@ -69,7 +74,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void GameOver()
-    {
+    {   
+        StopCoroutine(cameraShake.Shake(8f, .040f));
         gameOverText.enabled = true;
 
         for (int i = 0; i < ghosts.Length; i++) {
@@ -81,6 +87,7 @@ public class GameManager : MonoBehaviour
 
         private void Win()
     {
+        StopCoroutine(cameraShake.Shake(8f, .040f));
         WinText.enabled = true;
         BGM.Stop();
         JB_Hard.Stop();
@@ -142,6 +149,7 @@ public class GameManager : MonoBehaviour
     }
     public void PowerPelletEaten(PowerPellet pellet)
     {
+        StartCoroutine(cameraShake.Shake(8f, .040f));
         StartCoroutine(PowerMusic());
         for (int i = 0; i < ghosts.Length; i++) {
             ghosts[i].frightened.Enable(pellet.duration);
