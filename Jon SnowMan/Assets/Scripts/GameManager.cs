@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
         pacman.DeathSequence();
 
         SetLives(lives - 1);
+        Debug.Log("mort");
 
         if (lives > 0) {
             Invoke(nameof(ResetState), 3f);
