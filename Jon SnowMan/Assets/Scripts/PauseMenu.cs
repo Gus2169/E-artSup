@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameManager gameManager;
     
+    [SerializeField] private AudioSource Click;
     [SerializeField] private AudioSource JB_Hard;
     [SerializeField] private AudioSource BGM;
 
@@ -30,6 +31,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume ()
     {
+        Click.Play();
         JB_Hard.UnPause();
         BGM.UnPause();
         pauseMenuUI.SetActive(false);
@@ -40,7 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     void Pause ()
     {   
-        
+        Click.Play();
         JB_Hard.Pause();
         BGM.Pause();
         pauseMenuUI.SetActive(true);
@@ -49,7 +51,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void LoadMenu()
-    {
+    {   
+        Click.Play();
         SceneManager.LoadScene("Menu");
     }
 }
