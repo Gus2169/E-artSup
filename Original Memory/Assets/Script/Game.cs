@@ -7,20 +7,16 @@ public class Game : MonoBehaviour
 
     [SerializeField] List<Sprite> lstItem = new List<Sprite>();
     public List<Card> TurnedCards = new List<Card>();
-    [SerializeField] AudioClip musique;
+    
     public GameObject[] Slot;
     public Card card;
     public Animator anim;
     public bool turnedInCode;
-    public AudioSource audiosource;
-    public AudioClip clip;
-    public float volume = 0.5f;
 
     private void Awake()
 
     {
         Slot = GameObject.FindGameObjectsWithTag("Slot");
-        audiosource = GetComponent<AudioSource>();
         
     }
 
@@ -28,7 +24,6 @@ public class Game : MonoBehaviour
     void Start()
     {
         Shuffle();
-        audiosource.PlayOneShot(clip, volume);
     }
 
     // Update is called once per frame
