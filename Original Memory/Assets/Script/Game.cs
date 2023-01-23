@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
     public Card card;
     public Animator anim;
     public bool turnedInCode;
+    public GameObject Text;
 
     private void Awake()
 
@@ -24,6 +25,7 @@ public class Game : MonoBehaviour
     void Start()
     {
         Shuffle();
+        Text.SetActive(false);
     }
 
     // Update is called once per frame
@@ -62,6 +64,7 @@ public class Game : MonoBehaviour
                         TurnedCards[0].matched = true;
                         TurnedCards[1].matched = true;
                         TurnedCards.Clear();
+                        StartCoroutine(Matched());                        
                     }
                      
                 }
@@ -74,7 +77,12 @@ public class Game : MonoBehaviour
         }
          
     }
-
+    IEnumerator Matched()
+    {
+        Text.SetActive(true);
+        yield return new WaitForSeconds(1);
+        Text.SetActive(false);
+    }
     private void Shuffle()
     {
         List<Sprite> lstTemp = lstItem;

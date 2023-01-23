@@ -5,13 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public void ChangeScene(string _sceneName)
+    public void Easy ()
     {
-        SceneManager.LoadScene(_sceneName); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+    }
+    public void Medium ()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        
+    }
+    public void Hard ()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+        
     }
 
     public void Quit()
     {
+        Debug.Log("Quit");
         Application.Quit();
     }
 }
