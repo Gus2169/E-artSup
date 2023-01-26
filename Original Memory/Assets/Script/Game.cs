@@ -14,6 +14,7 @@ public class Game : MonoBehaviour
     public bool turnedInCode;
     public GameObject Text;
     [SerializeField] private AudioSource Carte;
+    [SerializeField] private AudioSource Paire;
 
     private void Awake()
 
@@ -58,6 +59,7 @@ public class Game : MonoBehaviour
                 }
                     TurnedCards.Add(card);
                     Carte.Play();
+                    
                 
 
                 if (TurnedCards.Count == 2)
@@ -68,6 +70,7 @@ public class Game : MonoBehaviour
                         TurnedCards[1].matched = true;
                         TurnedCards.Clear();
                         StartCoroutine(Matched());
+                        Paire.Play();
                         Carte.Play();                        
                     }
                      
