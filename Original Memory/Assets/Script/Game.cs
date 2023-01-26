@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
     public GameObject Finish;
     [SerializeField] private AudioSource Carte;
     [SerializeField] private AudioSource Paire;
+    [SerializeField] private AudioSource Win;
 
     private void Awake()
 
@@ -82,14 +83,17 @@ public class Game : MonoBehaviour
                     if (SceneManager.GetActiveScene().name == "Easy" && paire == 8)
                     {
                         Finish.SetActive(true);
+                        Win.Play();
                     }
                     if (SceneManager.GetActiveScene().name == "Medium" && paire == 12)
                     {
                         Finish.SetActive(true);
+                        Win.Play();
                     }
                     if (SceneManager.GetActiveScene().name == "Hard" && paire == 16)
                     {
                         Finish.SetActive(true);
+                        Win.Play();
                     }
 
                      
