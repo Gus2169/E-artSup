@@ -1374,7 +1374,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   turnedInCode: 0
   Text: {fileID: 803371888}
-  Finish: {fileID: 0}
+  Finish: {fileID: 2145669088}
   Carte: {fileID: 1471269674}
   Paire: {fileID: 301229872}
   Win: {fileID: 1676460037}
@@ -5321,8 +5321,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778619126}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -88.395}
-  m_LocalScale: {x: 0.75004447, y: 0.75004447, z: 0.75004447}
+  m_LocalPosition: {x: 0, y: 0, z: -88.079}
+  m_LocalScale: {x: 0.7036392, y: 0.7036392, z: 0.7036392}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 184221467}
@@ -5331,7 +5331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -239.42001, y: -171.93593}
+  m_AnchoredPosition: {x: -238.12, y: -171.93593}
   m_SizeDelta: {x: -175.9032, y: -223.90013}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1778619128
