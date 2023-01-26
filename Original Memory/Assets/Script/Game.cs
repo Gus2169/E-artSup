@@ -13,6 +13,7 @@ public class Game : MonoBehaviour
     public Animator anim;
     public bool turnedInCode;
     public GameObject Text;
+    [SerializeField] private AudioSource Carte;
 
     private void Awake()
 
@@ -39,6 +40,7 @@ public class Game : MonoBehaviour
              foreach (Card TurnedCard in TurnedCards)
                 {
                     TurnedCard.GetComponent<Animator>().SetBool("turned", false);
+                    Carte.Play();
                 }
 
                 TurnedCards.Clear();
@@ -55,6 +57,7 @@ public class Game : MonoBehaviour
                     return;
                 }
                     TurnedCards.Add(card);
+                    Carte.Play();
                 
 
                 if (TurnedCards.Count == 2)
@@ -64,7 +67,8 @@ public class Game : MonoBehaviour
                         TurnedCards[0].matched = true;
                         TurnedCards[1].matched = true;
                         TurnedCards.Clear();
-                        StartCoroutine(Matched());                        
+                        StartCoroutine(Matched());
+                        Carte.Play();                        
                     }
                      
                 }

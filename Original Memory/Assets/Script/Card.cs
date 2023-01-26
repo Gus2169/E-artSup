@@ -25,7 +25,7 @@ public class Card : MonoBehaviour
         // On donne turned au bool de l'animator
         anim.SetBool("turned", turnedInCode);
 
-        //Autre manière de l'écrire
+        //Autre maniï¿½re de l'ï¿½crire
         //turned = !turned;
         //anim.SetBool("turned", turned);
     }
