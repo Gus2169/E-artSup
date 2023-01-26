@@ -31,6 +31,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         Shuffle();
         Text.SetActive(false);
     }
