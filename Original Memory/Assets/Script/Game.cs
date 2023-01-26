@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class Game : MonoBehaviour
     public Animator anim;
     public bool turnedInCode;
     public GameObject Text;
+    int paire  = 0;
+    public static bool GameISFinish = false;
+    public GameObject Finish;
     [SerializeField] private AudioSource Carte;
     [SerializeField] private AudioSource Paire;
 
@@ -70,16 +74,30 @@ public class Game : MonoBehaviour
                         TurnedCards[1].matched = true;
                         TurnedCards.Clear();
                         StartCoroutine(Matched());
+                        paire ++;
+                        Debug.Log(paire); 
                         Paire.Play();
                         Carte.Play();                        
                     }
+                    if (SceneManager.GetActiveScene().name == "Easy" && paire == 8)
+                    {
+                        Finish.SetActive(true);
+                    }
+                    if (SceneManager.GetActiveScene().name == "Medium" && paire == 12)
+                    {
+                        Finish.SetActive(true);
+                    }
+                    if (SceneManager.GetActiveScene().name == "Hard" && paire == 16)
+                    {
+                        Finish.SetActive(true);
+                    }
+
                      
                 }
                 
-                   
                 
             }
-
+            
 
         }
          
@@ -87,7 +105,7 @@ public class Game : MonoBehaviour
     IEnumerator Matched()
     {
         Text.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         Text.SetActive(false);
     }
     private void Shuffle()

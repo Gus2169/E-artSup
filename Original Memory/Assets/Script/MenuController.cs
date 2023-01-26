@@ -20,6 +20,10 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
         
     }
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void Quit()
     {
