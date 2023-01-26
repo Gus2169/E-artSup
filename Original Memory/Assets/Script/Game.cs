@@ -48,7 +48,6 @@ public class Game : MonoBehaviour
                     TurnedCard.GetComponent<Animator>().SetBool("turned", false);
                     Carte.Play();
                 }
-
                 TurnedCards.Clear();
 
             }
@@ -95,7 +94,6 @@ public class Game : MonoBehaviour
                         Finish.SetActive(true);
                         Win.Play();
                     }
-
                      
                 }
                 
@@ -106,6 +104,12 @@ public class Game : MonoBehaviour
         }
          
     }
+
+    IEnumerator Check()
+    {
+        yield return new WaitForSeconds(1);
+    }
+
     IEnumerator Matched()
     {
         Text.SetActive(true);
