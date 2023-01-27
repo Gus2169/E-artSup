@@ -14,6 +14,7 @@ public class Game : MonoBehaviour
     public Animator anim;
     public bool turnedInCode;
     public GameObject Text;
+    public GameObject Gridboard;
     int paire  = 0;
     public static bool GameISFinish = false;
     public GameObject Finish;
@@ -82,16 +83,22 @@ public class Game : MonoBehaviour
                     }
                     if (SceneManager.GetActiveScene().name == "Easy" && paire == 8)
                     {
+                        Destroy(Gridboard);
+                        Text.SetActive(false);
                         Finish.SetActive(true);
                         Win.Play();
                     }
                     if (SceneManager.GetActiveScene().name == "Medium" && paire == 12)
                     {
+                        Destroy(Gridboard);
+                        Text.SetActive(false);
                         Finish.SetActive(true);
                         Win.Play();
                     }
                     if (SceneManager.GetActiveScene().name == "Hard" && paire == 16)
                     {
+                        Destroy(Gridboard);
+                        Text.SetActive(false);
                         Finish.SetActive(true);
                         Win.Play();
                     }
