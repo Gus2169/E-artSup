@@ -22,6 +22,5 @@ public class ChangeMenu : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return))
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         MenuSound.Play();
-        DontDestroyOnLoad(MenuSound);
     }
 }

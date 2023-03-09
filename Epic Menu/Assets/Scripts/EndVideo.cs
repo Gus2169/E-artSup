@@ -18,7 +18,7 @@ public class EndVideo : MonoBehaviour
     [SerializeField] private AudioSource Skyrim;
     void Start()
     {
-        //Skip.gameObject.SetActive(false);
+        Skip.gameObject.SetActive(false);
     }
 
     
@@ -38,7 +38,7 @@ public class EndVideo : MonoBehaviour
 
         if (Input.anyKey)
         {
-          // StartCoroutine(skip());
+            StartCoroutine(skip());
         }
 
     }
@@ -50,17 +50,17 @@ public class EndVideo : MonoBehaviour
 
     IEnumerator waiter()
     {
-        yield return new WaitForSeconds(56.25f);
+        yield return new WaitForSeconds(56.24f);
         VideoPlayer.gameObject.SetActive(false);
         DebMenu();
     }
 
-   /* IEnumerator skip()
+    IEnumerator skip()
     {   
         Skip.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         Skip.gameObject.SetActive(false);
-    }*/
+    }
 
     public void FinIntro()
     {
@@ -75,6 +75,4 @@ public class EndVideo : MonoBehaviour
         Menu.gameObject.SetActive(true);
         Dragonborn.Play();
     }
-    
-    
 }

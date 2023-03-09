@@ -15,7 +15,9 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public GameObject Fleche2;
     public AudioSource newGameSound;
     public TextMeshProUGUI TextMeshPro;
-      
+    [SerializeField] private AudioSource Highlight; 
+    [SerializeField] private AudioSource Open; 
+    [SerializeField] private AudioSource Close;  
     public enum ButtonType
     {
         NOUVEAU, CHARGER, CREDITS, QUITTER
@@ -26,6 +28,7 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
         Fleche1.gameObject.SetActive(true);
         Fleche2.gameObject.SetActive(true);
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color=active;
+        Highlight.Play();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -44,12 +47,15 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 break;
             case ButtonType.CHARGER:
                 Debug.Log("Charger");
+                Open.Play();
                 break;
             case ButtonType.CREDITS:
                 Debug.Log("Credits");
+                Open.Play();
                 break;
             case ButtonType.QUITTER:
                 Application.Quit();
+                Open.Play();
                 break;
         }
     }
