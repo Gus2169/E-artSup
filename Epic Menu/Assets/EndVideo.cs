@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class EndVideo : MonoBehaviour
 {
 
@@ -11,44 +12,34 @@ public class EndVideo : MonoBehaviour
     public GameObject VideoPlayer;
     public bool SongIntro = true;
     public bool SongMenu = false;
-    public bool Menubool = true;
+    public bool intro = true;
 
     [SerializeField] private AudioSource Dragonborn;
     [SerializeField] private AudioSource Skyrim;
-    // Start is called before the first frame update
     void Start()
     {
-        Skip.gameObject.SetActive(false);
+        //Skip.gameObject.SetActive(false);
     }
 
     
     void Update()
     {
+        
+        if(intro == false)
+        {
+            DebMenu();
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            SongIntro = false;
-            VideoPlayer.gameObject.SetActive(false);
-            Skyrim.Stop();
-            Menu.gameObject.SetActive(true);
+            FinIntro();
+            DebMenu();
         }
 
         if (Input.anyKey)
         {
-            StartCoroutine(skip());
+          // StartCoroutine(skip());
         }
-
-        if (SongIntro == false)
-        {
-            Dragonborn.Play();
-        }
-
-        if (VideoPlayer == false)
-        {
-            Dragonborn.Play();
-            Menu.gameObject.SetActive(true);
-        }
-        
-
 
     }
 
@@ -60,14 +51,29 @@ public class EndVideo : MonoBehaviour
     IEnumerator waiter()
     {
         yield return new WaitForSeconds(56.25f);
-        Object.Destroy(this.gameObject);
+        VideoPlayer.gameObject.SetActive(false);
+        DebMenu();
     }
 
-    IEnumerator skip()
+   /* IEnumerator skip()
     {   
         Skip.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         Skip.gameObject.SetActive(false);
+    }*/
+
+    public void FinIntro()
+    {
+        intro = false;
+        SongIntro = false;
+        Skyrim.Stop();
+        VideoPlayer.gameObject.SetActive(false);
+    }
+
+    public void DebMenu()
+    {
+        Menu.gameObject.SetActive(true);
+        Dragonborn.Play();
     }
     
     
